@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} Список всех книг {% endblock %}
+
+{% block content %}
+
+    <h1>Список книг</h1>
+    <a href="{% url 'create' %}">Добавить книгу</a>
+    <ul>
+        {% for book in books %}
+            <li {% if not book.is_active %} class="inactive" {% endif %}>
+                <a href="{% url 'detail-book' book.pk %}">{{ book.name }}</a>
+                <h2>{{ book.author }}</h2>
+                <p>{{ book.date }}</p>
+                <p>Тип книги - {{ book.type }}</p>
+                <a href="{% url 'update-book' book.pk %}">Обновить данные</a>
+                <a href="{% url 'delete' book.pk %}">Удалить данные</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

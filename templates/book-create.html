@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} {% if object %} Редактировать{% else %}Добавление{% endif %} Книгу{% endblock %}
+
+{% block content %}
+
+    <h1>{% if object %} Редактировать{% else %}Добавление{% endif %} Книгу</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn-primary">Сохрагнить</button>
+
+    </form>
+    <br>
+    <a href="{% url 'book-list' %}">Назад</a>
+{% endblock %}

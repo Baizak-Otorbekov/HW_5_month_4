@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ books.name }} {% endblock %}
+
+{% block content %}
+
+<li {% if not books.is_active %} class="inactive" {% endif %}>
+    <a href="#">{{ books.name }}</a>
+    <h2>{{ books.author }}</h2>
+    <p>{{ books.date }}</p>
+    <p>Тип книги - {{ books.type }}</p>
+    <a href="#">Удалить данные</a>
+</li>
+
+{% endblock %}
