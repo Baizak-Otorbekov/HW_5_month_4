@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView,\
-UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.db.models import Q
 from apps.book.forms import BookForm
 from apps.book.models import Book
 
@@ -11,7 +11,19 @@ class BookListView(ListView):
     context_object_name = 'books'
 
     def get_queryset(self):
-        return Book.objects.filter(is_active=True).order_by('-created')
+        queryset = Book.objects.filter(is_active=True).order_by('-created')
+
+        search_query = self.request.GET.get('search', '')
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) |  
+                Q(author__icontains=search_query) |  
+                Q(description__icontains=search_query)  
+            )
+
+        return queryset
+
 
 class BookCreateView(CreateView):
     model = Book

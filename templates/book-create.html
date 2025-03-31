@@ -5,12 +5,87 @@
 {% block content %}
 
     <h1>{% if object %} Редактировать{% else %}Добавление{% endif %} Книгу</h1>
-    <form method="post">
+    
+    <form method="post" class="book-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn-primary">Сохрагнить</button>
-
+        <button type="submit" class="btn-primary">Сохранить</button>
     </form>
+    
     <br>
-    <a href="{% url 'book-list' %}">Назад</a>
+    <a href="{% url 'book-list' %}" class="btn-back">Назад</a>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .book-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-form label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .book-form input,
+        .book-form select,
+        .book-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .book-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .book-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #2196F3;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #1976D2;
+        }
+    </style>
+
 {% endblock %}

@@ -1,14 +1,77 @@
 {% extends 'base.html' %}
 
-{% block title %}Удаление {{book.name}} {% endblock %}
+{% block title %}Удаление {{ book.name }}{% endblock %}
 
 {% block content %}
-<h1>Вы уверены что хотите удалить {{ book.name }}</h1>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn-danger">Удалить</button>
+
+    <h1>Вы уверены, что хотите удалить "{{ book.name }}"?</h1>
+
+    <form method="post" class="delete-form">
+        {% csrf_token %}
+        <button type="submit" class="btn-danger">Удалить</button>
+    </form>
+
     <br>
-    <a href="{%  url 'book-list' %}">Назад</a>
-</form>
+    <a href="{% url 'book-list' %}" class="btn-back">Назад</a>
+
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #D32F2F;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .delete-form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .delete-form button {
+            background-color: #D32F2F;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-form button:hover {
+            background-color: #C2185B;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #2196F3;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #1976D2;
+        }
+    </style>
 
 {% endblock %}

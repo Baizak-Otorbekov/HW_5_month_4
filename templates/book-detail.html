@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %} {{ books.name }} {% endblock %}
+{% block title %} {{ book.name }} {% endblock %}
 
 {% block content %}
+    <li {% if not book.is_active %} class="inactive" {% endif %}>
+        <a href="#">{{ book.name }}</a>
+        <h2>{{ book.author }}</h2>
+        <p>{{ book.date }}</p>
+        <p>Тип книги - {{ book.type }}</p>
 
-<li {% if not books.is_active %} class="inactive" {% endif %}>
-    <a href="#">{{ books.name }}</a>
-    <h2>{{ books.author }}</h2>
-    <p>{{ books.date }}</p>
-    <p>Тип книги - {{ books.type }}</p>
-    <a href="#">Удалить данные</a>
-</li>
-
+        <form method="post" action="{% url 'delete' book.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-danger">Удалить данные</button>
+        </form>
+    </li>
 {% endblock %}
